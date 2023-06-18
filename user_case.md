@@ -30,8 +30,6 @@
 
 **Atores principais:** Usuário
 
-**Descrição:** O usuário conclui a compra dos ingressos presentes no carrinho.
-
 **Fluxo básico:**
 
 1. O usuário acessa o carrinho de compras.
@@ -46,8 +44,6 @@
 - No passo 3, se algum ingresso no carrinho estiver indisponível, o sistema notifica o usuário e impede a conclusão da compra.
 
 ## Gerenciar Eventos
-
-**Descrição:** O administrador do sistema gerencia os eventos disponíveis para venda de ingressos.
 
 **Fluxo básico:**
 
