@@ -6,19 +6,14 @@ O sistema de Compra de Ingressos é uma aplicação para gerenciar a venda e com
 
 ### Ingresso
 
-A entidade "Ingresso" representa um ingresso individual.
-
 Atributos:
 
-- `tipo` (string): O tipo de ingresso.
 - `preco` (number): O preço do ingresso.
 - `dataHora` (Date): A data e hora do evento.
 - `localizacao` (string): A localização do evento.
 - `disponibilidade` (number): A quantidade disponível de ingressos.
 
 ### Usuario
-
-A entidade "Usuario" representa um usuário do sistema.
 
 Atributos:
 
@@ -28,7 +23,6 @@ Atributos:
 
 ### Evento
 
-A entidade "Evento" representa um evento para o qual os ingressos são vendidos.
 
 Atributos:
 
@@ -39,15 +33,12 @@ Atributos:
 
 ### Carrinho
 
-A entidade "Carrinho" representa o carrinho de compras do usuário.
 
 Atributos:
 
 - `ingressos` (array de Ingresso): Os ingressos adicionados ao carrinho.
 
 ### Compra
-
-A entidade "Compra" representa uma compra concluída de ingressos.
 
 Atributos:
 
