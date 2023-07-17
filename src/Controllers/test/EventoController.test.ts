@@ -28,9 +28,9 @@ describe('EventoController', () => {
       // Simula o corpo da requisição para criar um evento
       const req = {
         body: {
-          nome: 'Evento de Teste',
-          data: '2023-07-16',
-          localizacao: 'Local de Teste',
+          nome: 'Evento 1',
+          data: '2023-07-17',
+          localizacao: 'Local 1',
           capacidade: 100,
         },
       } as Request;
@@ -44,9 +44,9 @@ describe('EventoController', () => {
       // Evento que será retornado pelo mock do eventoRepository
       const novoEvento: Evento = {
         id: 1,
-        nome: 'Evento de Teste',
-        data: new Date('2023-07-16'),
-        localizacao: 'Local de Teste',
+        nome: 'Evento 1',
+        data: new Date('2023-07-17'),
+        localizacao: 'Local 1',
         capacidade: 100,
       };
       jest.spyOn(eventoRepository, 'criarEvento').mockResolvedValue(novoEvento);
@@ -65,9 +65,9 @@ describe('EventoController', () => {
       
       const req = {
         body: {
-          nome: 'Evento de Teste',
-          data: '2023-07-16',
-          localizacao: 'Local de Teste',
+          nome: 'Evento 1',
+          data: '2023-07-17',
+          localizacao: 'Local 1',
           capacidade: 100,
         },
       } as Request;
@@ -97,7 +97,7 @@ describe('EventoController', () => {
     it('deve retornar uma lista de eventos', async () => {
       
       const eventos: Evento[] = [
-        { id: 1, nome: 'Evento 1', data: new Date('2023-07-16'), localizacao: 'Local 1', capacidade: 50 },
+        { id: 1, nome: 'Evento 1', data: new Date('2023-07-17'), localizacao: 'Local 1', capacidade: 50 },
         { id: 2, nome: 'Evento 2', data: new Date('2023-07-17'), localizacao: 'Local 2', capacidade: 100 },
       ];
 
