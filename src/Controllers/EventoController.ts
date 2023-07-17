@@ -37,22 +37,33 @@ export class EventoController {
 
     async atualizarEvento(req: Request, res: Response) {
         try {
-        const evento = req.body as Evento;
-        const eventoAtualizado = await this.eventoRepository.atualizarEvento(evento);
-        res.status(200).json(eventoAtualizado);
+          const evento = req.body as Evento;
+          const eventoAtualizado = await this.eventoRepository.atualizarEvento(evento);
+          
+          if (eventoAtualizado === null) { // Verifica se o evento foi encontrado
+            res.status(404).json({ error: 'Evento não encontrado' });
+          } else {
+            res.status(200).json(eventoAtualizado);
+          }
         } catch (error) {
-        res.status(500).json({error: 'Nao foi possivel atualizar evento' })
+          res.status(500).json({ error: 'Nao foi possivel atualizar evento' });
         }
-    }
+      }
+      
 
     async excluirEvento(req: Request, res: Response) {
         try {
-        const id = parseInt(req.params.id);
-        await this.eventoRepository.excluirEvento(id);
-        res.status(204).send();
+          const id = parseInt(req.params.id);
+          const excluiu = await this.eventoRepository.excluirEvento(id);
+          if (excluiu) {
+            res.status(204).send();
+          } else {
+            res.status(404).json({ error: 'Evento não encontrado' });
+          }
         } catch (error) {
-        res.status(500).json({error: 'Nao foi possivel excluir evento' })
+          res.status(500).json({ error: 'Nao foi possivel excluir evento' });
         }
-    }
+      }
+      
 
 }
