@@ -18,10 +18,10 @@ export class EventoRepo implements EventoRepository{
         return evento || null;
     }
 
-    async atualizarEvento(evento: Evento): Promise<Evento | boolean> {
+    async atualizarEvento(evento: Evento): Promise<Evento | null> {
         const index = this.eventos.findIndex(e => e.id === evento.id);
         if (index === -1) {
-          return false;
+          return null; // Retornar null quando o evento não existe
         }
         this.eventos[index] = evento;
         return evento;

@@ -52,7 +52,7 @@ describe('EventoRepository', () => {
       test('deve retornar false para um evento inexistente', async () => {
         const eventoData: Evento = { id: 999, nome: 'Evento Teste', data: new Date('2023-01-01'), localizacao: 'Local Teste', capacidade: 100 };
         const eventoAtualizado = await eventoRepository.atualizarEvento(eventoData);
-        expect(eventoAtualizado).toBe(false);
+        expect(eventoAtualizado).toBe(null);
       });
     });
 
