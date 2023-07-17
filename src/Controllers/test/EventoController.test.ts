@@ -144,6 +144,59 @@ describe('EventoController', () => {
     });
   });
 
+  // Teste para o método "obterEvento"
+describe('obterEvento', () => {
+    // Deve retornar um evento existente
+    it('deve retornar um evento existente', async () => {
+      const eventoExistente: Evento = {
+        id: 1,
+        nome: 'Evento Existente',
+        data: new Date('2023-07-17'),
+        localizacao: 'Local Existente',
+        capacidade: 100,
+      };
+  
+      const req = {
+        params: { id: '1' },
+      } as unknown as Request;
+  
+      const res = {
+        json: jest.fn(),
+        status: jest.fn().mockReturnThis(),
+      } as unknown as Response;
+  
+      // Configura o mock do eventoRepository para retornar o evento simulado
+      jest.spyOn(eventoRepository, 'obterEvento').mockResolvedValue(eventoExistente);
+  
+      await eventoController.obterEvento(req, res);
+  
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(eventoExistente);
+    });
+  
+    // Deve lidar com a obtenção de um evento inexistente e retornar o código de status 404
+    it('deve lidar com a obtenção de um evento inexistente e retornar o código de status 404', async () => {
+      const req = {
+        params: { id: '100' },
+      } as unknown as Request;
+  
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+        send: jest.fn(),
+      } as unknown as Response;
+  
+      // Configura o mock do eventoRepository para retornar null quando o evento não existe
+      jest.spyOn(eventoRepository, 'obterEvento').mockResolvedValue(null);
+  
+      await eventoController.obterEvento(req, res);
+  
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Evento não encontrado' });
+    });
+  });
+  
+
   // Teste para o método "atualizarEvento"
   describe('atualizarEvento', () => {
     // Deve atualizar um evento existente e retorná-lo

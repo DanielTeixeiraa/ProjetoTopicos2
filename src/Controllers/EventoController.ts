@@ -28,12 +28,16 @@ export class EventoController {
     async obterEvento(req: Request, res: Response) {
         const id = parseInt(req.params.id);
         const evento = await this.eventoRepository.obterEvento(id);
+        
         if (evento) {
-            res.status(200).json(evento);
+          // Se o evento for encontrado, retornamos o evento com o código de status 200
+          res.status(200).json(evento);
         } else {
-            res.status(404).send();
+          // Se o evento não for encontrado, retornamos o código de status 404 (não encontrado)
+          res.status(404).json({ error: 'Evento não encontrado' });
         }
-    }
+      }
+      
 
     async atualizarEvento(req: Request, res: Response) {
         try {
