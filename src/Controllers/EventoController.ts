@@ -18,7 +18,6 @@ export class EventoController {
     async obterEventos(req: Request, res: Response) {
         try {
         const eventos = await this.eventoRepository.obterEventos();
-        res.json(eventos);
         res.status(200).json(eventos);
         } catch (error) {
             res.status(500).json({error: 'Nao foi possivel obter eventos' })
