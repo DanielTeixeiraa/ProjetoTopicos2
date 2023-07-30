@@ -9,9 +9,7 @@ O sistema de Compra de Ingressos é uma aplicação para gerenciar a venda e com
 Atributos:
 
 - `preco` (number): O preço do ingresso.
-- `dataHora` (Date): A data e hora do evento.
-- `localizacao` (string): A localização do evento.
-- `disponibilidade` (number): A quantidade disponível de ingressos.
+- `evento` (Evento): O evento ao qual o ingresso está associado.
 
 ### Usuario
 
