@@ -22,7 +22,7 @@ export class IngressoRepo implements IngressoRepository{
     async atualizarIngresso(ingresso: Ingresso): Promise<Ingresso | null> {
         const index = this.ingressos.findIndex(e => e.id === ingresso.id);
         if (index === -1) {
-          return null; // Retornar null quando o ingresso não existe
+          return null; 
         }
         this.ingressos[index] = ingresso;
         return ingresso;
@@ -39,7 +39,7 @@ export class IngressoRepo implements IngressoRepository{
     }
 
     async obterIngressosPorEvento(evento: Evento): Promise<Ingresso[]> {
-        return this.ingressos.filter(ingresso => ingresso.evento.id === evento.id);
+        return this.ingressos.filter(ingresso => ingresso.idEvento === evento.id);
     }
 
 }
