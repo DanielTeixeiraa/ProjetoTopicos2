@@ -1,4 +1,3 @@
-// src/route/eventoRoute.ts
 import express, { Router } from 'express';
 import { EventoController } from '../Controllers/EventoController';
 import { EventoRepository } from '../Repositories/EventoRepository';

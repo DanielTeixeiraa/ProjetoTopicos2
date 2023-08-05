@@ -108,7 +108,7 @@
   },
   "include": [
     "src/**/*"
-  ],
+, "test/Controllers/CarrinhoController.test.ts"  ],
   "exclude": [
     "node_modules"
   ]

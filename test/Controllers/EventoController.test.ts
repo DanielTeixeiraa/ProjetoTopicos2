@@ -1,6 +1,6 @@
-import { Evento } from "../../Models/Eventos";
-import { EventoController } from '../EventoController';
-import { EventoRepository } from "../../Repositories/EventoRepository";
+import { Evento } from "../../src/Models/Eventos";
+import { EventoController } from '../../src/Controllers/EventoController';
+import { EventoRepository } from "../../src/Repositories/EventoRepository";
 import { Request, Response } from 'express';
 
 describe('EventoController', () => {

@@ -38,10 +38,6 @@ export class IngressoRepo implements IngressoRepository{
         return true;
     }
 
-    async obterIngressosPorEvento(evento: Evento): Promise<Ingresso[]> {
-        return this.ingressos.filter(ingresso => ingresso.idEvento === evento.id);
-    }
-
 }
 
 

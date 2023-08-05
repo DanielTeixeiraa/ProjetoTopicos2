@@ -35,6 +35,7 @@ Atributos:
 Atributos:
 
 - `ingressos` (array de Ingresso): Os ingressos adicionados ao carrinho.
+- `usuario` (Usuario): O usuário 
 
 ### Compra
 

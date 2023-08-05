@@ -1,7 +1,6 @@
-import { Ingresso } from "src/Models/Ingresso";
-import { IngressoRepository } from "src/Repositories/IngressoRepository";
-import { IngressoController } from "../IngressoController";
-import { Evento } from "src/Models/Eventos";
+import { Ingresso } from "../../src/Models/Ingresso";
+import { IngressoRepository } from "../../src/Repositories/IngressoRepository";
+import { IngressoController } from "../../src/Controllers/IngressoController";
 import { Request, Response } from 'express';
 
 describe('IngressoController', () => {

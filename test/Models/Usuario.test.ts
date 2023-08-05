@@ -1,6 +1,6 @@
-import { Usuario } from '../src/Models/Usuario';
-import { UsuarioRepository } from '../src/Repositories/UsuarioRepository';
-import { UsuarioRepo } from '../src/Repositories/inMemory/UsuarioRepo';
+import { Usuario } from '../../src/Models/Usuario';
+import { UsuarioRepository } from '../../src/Repositories/UsuarioRepository';
+import { UsuarioRepo } from '../../src/Repositories/inMemory/UsuarioRepo';
 
 describe('UsuarioRepo', () => {
     let usuarioRepo: UsuarioRepository;

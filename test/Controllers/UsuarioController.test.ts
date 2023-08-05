@@ -1,6 +1,6 @@
-import { Usuario } from "../../Models/Usuario";
-import { UsuarioRepository } from "src/Repositories/UsuarioRepository";
-import { UsuarioController } from "../UsuarioController";
+import { Usuario } from "../../src/Models/Usuario";
+import { UsuarioRepository } from "../../src/Repositories/UsuarioRepository";
+import { UsuarioController } from "../../src/Controllers/UsuarioController";
 import { Request, Response } from 'express';
 
 describe('UsuarioController', () => {
