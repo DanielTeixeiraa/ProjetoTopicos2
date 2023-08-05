@@ -1,7 +1,5 @@
-import { Evento } from "./Eventos";
-
 export interface Ingresso {
     id: number;
-    evento: Evento;
+    idEvento: number;
     preco: number;
 }

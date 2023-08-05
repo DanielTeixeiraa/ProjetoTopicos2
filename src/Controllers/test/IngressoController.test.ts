@@ -25,14 +25,7 @@ describe('IngressoController', () => {
         it('Deve retornar 201 quando o ingresso for criado com sucesso', async () => {
             const ingresso = {
                 id: 1,
-                evento: {
-                    id: 1,
-                    nome: 'Show do Metallica',
-                    data: new Date(),
-                    local: 'Estádio do Morumbi',
-                    capacidade: 50000,
-                    ingressosDisponiveis: 50000,
-                } as unknown as Evento,
+                idEvento: 1,
                 preco: 100,
             } as Ingresso;
 
@@ -54,16 +47,10 @@ describe('IngressoController', () => {
         });
 
         it('Deve retornar 500 quando ocorrer algum erro ao criar o ingresso', async () => {
+
             const ingresso = {
                 id: 1,
-                evento: {
-                    id: 1,
-                    nome: 'Show do Metallica',
-                    data: new Date(),
-                    local: 'Estádio do Morumbi',
-                    capacidade: 50000,
-                    ingressosDisponiveis: 50000,
-                } as unknown as Evento,
+                idEvento: 1,
                 preco: 100,
             } as Ingresso;
 
@@ -90,27 +77,13 @@ describe('IngressoController', () => {
             const ingressos = [
                 {
                     id: 1,
-                    evento: {
-                        id: 1,
-                        nome: 'Show do Metallica',
-                        data: new Date(),
-                        local: 'Estádio do Morumbi',
-                        capacidade: 50000,
-                        ingressosDisponiveis: 50000,
-                    } as unknown as Evento,
+                    idEvento: 1,
                     preco: 100,
                 } as Ingresso,
                 {
                     id: 2,
-                    evento: {
-                        id: 2,
-                        nome: 'Show do Iron Maiden',
-                        data: new Date(),
-                        local: 'Estádio do Morumbi',
-                        capacidade: 50000,
-                        ingressosDisponiveis: 50000,
-                    } as unknown as Evento,
-                    preco: 100,
+                    idEvento: 2,
+                    preco: 200,
                 } as Ingresso,
             ];
 
@@ -150,14 +123,7 @@ describe('IngressoController', () => {
         it('Deve retornar 200 quando o ingresso for obtido com sucesso', async () => {
             const ingresso = {
                 id: 1,
-                evento: {
-                    id: 1,
-                    nome: 'Show do Metallica',
-                    data: new Date(),
-                    local: 'Estádio do Morumbi',
-                    capacidade: 50000,
-                    ingressosDisponiveis: 50000,
-                } as unknown as Evento,
+                idEvento: 1,
                 preco: 100,
             } as Ingresso;
 
@@ -225,14 +191,7 @@ describe('IngressoController', () => {
         it('Deve retornar 200 quando o ingresso for atualizado com sucesso', async () => {
             const ingresso = {
                 id: 1,
-                evento: {
-                    id: 1,
-                    nome: 'Show do Metallica',
-                    data: new Date(),
-                    local: 'Estádio do Morumbi',
-                    capacidade: 50000,
-                    ingressosDisponiveis: 50000,
-                } as unknown as Evento,
+                idEvento: 1,
                 preco: 100,
             } as Ingresso;
 
@@ -261,14 +220,7 @@ describe('IngressoController', () => {
 
             const ingresso = {
                 id: 1,
-                evento: {
-                    id: 1,
-                    nome: 'Show do Metallica',
-                    data: new Date(),
-                    local: 'Estádio do Morumbi',
-                    capacidade: 50000,
-                    ingressosDisponiveis: 50000,
-                } as unknown as Evento,
+                idEvento: 1,
                 preco: 100,
             } as Ingresso;
 
@@ -315,14 +267,7 @@ describe('IngressoController', () => {
         it('Deve retornar 200 quando o ingresso for excluído com sucesso', async () => {
             const ingresso = {
                 id: 1,
-                evento: {
-                    id: 1,
-                    nome: 'Show do Metallica',
-                    data: new Date(),
-                    local: 'Estádio do Morumbi',
-                    capacidade: 50000,
-                    ingressosDisponiveis: 50000,
-                } as unknown as Evento,
+                idEvento: 1,
                 preco: 100,
             } as Ingresso;
     

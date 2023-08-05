@@ -14,14 +14,8 @@ describe('IngressoRepository', () => {
         it('deve criar um ingresso', async () => {
             const ingresso = {
                 id: 1,
-                evento: {
-                    id: 1,
-                    nome: 'Show do Metallica',
-                    local: 'Allianz Parque',
-                    data: new Date('2021-10-01'),
-                    capacidade: 45000
-                },
-                preco: 250
+                idEvento: 1,
+                preco: 100,
             } as unknown as Ingresso;
 
             const novoIngresso = await ingressoRepository.criarIngresso(ingresso);
@@ -34,26 +28,14 @@ describe('IngressoRepository', () => {
         it('deve retornar uma lista de ingressos', async () => {
             const ingresso1 = {
                 id: 1,
-                evento: {
-                    id: 1,
-                    nome: 'Show do Metallica',
-                    local: 'Allianz Parque',
-                    data: new Date('2021-10-01'),
-                    capacidade: 45000
-                },
-                preco: 250
+                idEvento: 1,
+                preco: 100,
             } as unknown as Ingresso;
 
             const ingresso2 = {
                 id: 2,
-                evento: {
-                    id: 2,
-                    nome: 'Show do Iron Maiden',
-                    local: 'Allianz Parque',
-                    data: new Date('2021-10-02'),
-                    capacidade: 45000
-                },
-                preco: 200
+                idEvento: 2,
+                preco: 200,
             } as unknown as Ingresso;
 
             await ingressoRepository.criarIngresso(ingresso1);
@@ -69,14 +51,8 @@ describe('IngressoRepository', () => {
         it('deve retornar um ingresso', async () => {
             const ingresso = {
                 id: 1,
-                evento: {
-                    id: 1,
-                    nome: 'Show do Metallica',
-                    local: 'Allianz Parque',
-                    data: new Date('2021-10-01'),
-                    capacidade: 45000
-                },
-                preco: 250
+                idEvento: 1,
+                preco: 100,
             } as unknown as Ingresso;
 
             await ingressoRepository.criarIngresso(ingresso);
@@ -98,14 +74,8 @@ describe('IngressoRepository', () => {
         it('deve atualizar um ingresso', async () => {
             const ingresso = {
                 id: 1,
-                evento: {
-                    id: 1,
-                    nome: 'Show do Metallica',
-                    local: 'Allianz Parque',
-                    data: new Date('2021-10-01'),
-                    capacidade: 45000
-                },
-                preco: 250
+                idEvento: 1,
+                preco: 100,
             } as unknown as Ingresso;
 
             await ingressoRepository.criarIngresso(ingresso);
@@ -123,14 +93,8 @@ describe('IngressoRepository', () => {
         it('deve excluir um ingresso', async () => {
             const ingresso = {
                 id: 1,
-                evento: {
-                    id: 1,
-                    nome: 'Show do Metallica',
-                    local: 'Allianz Parque',
-                    data: new Date('2021-10-01'),
-                    capacidade: 45000
-                },
-                preco: 250
+                idEvento: 1,
+                preco: 100,
             } as unknown as Ingresso;
 
             await ingressoRepository.criarIngresso(ingresso);
