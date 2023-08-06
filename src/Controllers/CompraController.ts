@@ -9,7 +9,11 @@ export class CompraController {
         try {
             const compra = req.body as Compra;
             const novaCompra = await this.compraRepository.criarCompra(compra);
-            res.status(201).json(novaCompra);
+            if (novaCompra) {
+                res.status(201).json(novaCompra);
+            } else {
+                res.status(400).json({ error: 'Compra nao encontrada' });
+            }
         } catch (error) {
             res.status(500).json({ error: 'Nao foi possivel criar compra' });
         }
@@ -28,12 +32,7 @@ export class CompraController {
         const id = parseInt(req.params.id);
         try {
             const compra = await this.compraRepository.obterCompra(id);
-
-            if (compra) {
                 res.status(200).json(compra);
-            } else {
-                res.status(404).json({ error: 'Compra nao encontrada' });
-            }
         } catch (error) {
             res.status(500).json({ error: 'Nao foi possivel obter compra' });
         }
@@ -44,7 +43,7 @@ export class CompraController {
             const compra = req.body as Compra;
             const compraAtualizada = await this.compraRepository.atualizarCompra(compra);
 
-            if (compraAtualizada === null) { // Verifica se o compra foi encontrado
+            if (compraAtualizada === null) { 
                 res.status(404).json({ error: 'Compra nao encontrada' });
             } else {
                 res.status(200).json(compraAtualizada);

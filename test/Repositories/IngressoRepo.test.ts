@@ -77,6 +77,18 @@ describe('IngressoRepository', () => {
 
             expect(ingressoAtualizado).toEqual(ingresso);
         });
+
+        it('deve retornar null se o ingresso não existir', async () => {
+            const ingresso = {
+                id: 1,
+                idEvento: 1,
+                preco: 100,
+            } as Ingresso;
+
+            const ingressoAtualizado = await ingressoRepository.atualizarIngresso(ingresso);
+
+            expect(ingressoAtualizado).toBeNull();
+        });
     }
     );
 
@@ -95,6 +107,20 @@ describe('IngressoRepository', () => {
             const ingressoObtido = await ingressoRepository.obterIngresso(1);
 
             expect(ingressoObtido).toBeNull();
+        });
+
+        it('deve retornar false se o ingresso não existir', async () => {
+            const ingresso = {
+                id: 1,
+                idEvento: 1,
+                preco: 100,
+            } as Ingresso;
+
+            await ingressoRepository.criarIngresso(ingresso);
+
+            const ingressoObtido = await ingressoRepository.excluirIngresso(2);
+
+            expect(ingressoObtido).toBe(false)
         });
     }
     );

@@ -9,7 +9,8 @@ export class CarrinhoController {
         try {
             const carrinho = req.body as Carrinho;
             const novoCarrinho = await this.carrinhoRepository.criarCarrinho(carrinho);
-            res.status(201).json(novoCarrinho);
+                res.status(201).json(novoCarrinho);
+
         } catch (error) {
             res.status(500).json({ error: 'Nao foi possivel criar carrinho' });
         }
@@ -18,7 +19,8 @@ export class CarrinhoController {
     async obterCarrinhos(req: Request, res: Response) {
         try {
             const carrinhos = await this.carrinhoRepository.obterCarrinhos();
-            res.status(200).json(carrinhos);
+                res.status(200).json(carrinhos);
+
         } catch (error) {
             res.status(500).json({ error: 'Nao foi possivel obter carrinhos' });
         }

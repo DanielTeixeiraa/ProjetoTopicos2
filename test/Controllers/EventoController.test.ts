@@ -263,6 +263,35 @@ describe('obterEvento', () => {
       expect(res.json).toHaveBeenCalledWith({ error: 'Evento não encontrado' });
     });
 
+    it('deve lidar com erros ao atualizar um evento e retornar o código de status 500', async () => {
+      const req = {
+          params: { id: '1' },
+          body: {
+              nome: 'Evento Atualizado',
+              data: '2023-07-18',
+              local: 'Local Atualizado',
+          },
+      } as unknown as Request;
+
+     
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      } as unknown as Response;
+
+      
+      jest.spyOn(eventoRepository, 'atualizarEvento').mockRejectedValue(new Error('Falha ao atualizar evento'));
+
+      
+      await eventoController.atualizarEvento(req, res);
+
+      
+      expect(res.status).toHaveBeenCalledWith(500);
+      
+      expect(res.json).toHaveBeenCalledWith({ error: 'Nao foi possivel atualizar evento' });
+    } );
+   } );   
+
     // Testes para o método "excluirEvento"
     describe('excluirEvento', () => {
         // Deve excluir um evento existente e retornar uma mensagem de sucesso
@@ -317,6 +346,30 @@ describe('obterEvento', () => {
            
             expect(res.json).toHaveBeenCalledWith({ error: 'Evento não encontrado' });
         });
+
+        it('deve lidar com erros ao excluir um evento e retornar o código de status 500', async () => {
+            const req = {
+                params: { id: '1' },
+            } as unknown as Request;
+        
+           
+            const res = {
+              status: jest.fn().mockReturnThis(),
+              json: jest.fn(),
+            } as unknown as Response;
+        
+           
+            jest.spyOn(eventoRepository, 'excluirEvento').mockRejectedValue(new Error('Falha ao excluir evento'));
+        
+           
+            await eventoController.excluirEvento(req, res);
+        
+            // Verifica se o método "excluirEvento" foi chamado com o ID do evento
+            expect(eventoRepository.excluirEvento).toHaveBeenCalledWith(1);
+           
+            expect(res.status).toHaveBeenCalledWith(500);
+           
+            expect(res.json).toHaveBeenCalledWith({ error: 'Nao foi possivel excluir evento' });
+        });
     });
   });
-});

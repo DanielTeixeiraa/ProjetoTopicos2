@@ -84,6 +84,26 @@ describe('CarrinhoRepository', () => {
             expect(carrinhoObtido).toEqual(carrinhoAtualizado);
 
         });
+
+        it('deve retornar null quando não encontrar o carrinho', async () => {
+            const carrinho = {
+                id: 1,
+                idUsuario: 1,
+                idIngressos: [1],
+            } as Carrinho;
+
+            const carrinhoAtualizado = {
+                id: 2,
+                idUsuario: 2,
+                idIngressos: [2],
+            }as Carrinho;
+
+            await carrinhoRepository.criarCarrinho(carrinho);
+
+            const carrinhoObtido = await carrinhoRepository.atualizarCarrinho(carrinhoAtualizado);
+
+            expect(carrinhoObtido).toBeNull();
+        });
     });
 
     describe('deletarCarrinho', () => {
@@ -102,7 +122,20 @@ describe('CarrinhoRepository', () => {
 
             expect(carrinhoObtido).toBeNull();
         });
-    }
+
+        it('deve retornar false quando não encontrar o carrinho', async () => {
+            const carrinho = {
+                id: 1,
+                idUsuario: 1,
+                idIngressos: [1],
+            } as Carrinho;
+
+            await carrinhoRepository.criarCarrinho(carrinho);
+
+            const carrinhoExcluido = await carrinhoRepository.excluirCarrinho(2);
+
+            expect(carrinhoExcluido).toBeFalsy();
+        });}
     );
 
 });

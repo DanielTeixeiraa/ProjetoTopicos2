@@ -87,6 +87,28 @@ describe('CompraRepository', () => {
 
             expect(compraObtida).toEqual(compraAtualizada);
         });
+
+        it('deve retornar null se a compra não existir', async () => {
+            const compra = {
+                id: 1,
+                idUsuario: 1,
+                idIngressos: [1],
+                dataCompra: new Date(),
+            } as Compra;
+
+            const compraAtualizada = {
+                id: 2,
+                idUsuario: 2,
+                idIngressos: [2],
+                dataCompra: new Date(),
+            } as Compra;
+
+            await compraRepository.criarCompra(compra);
+
+            const compraObtida = await compraRepository.atualizarCompra(compraAtualizada);
+
+            expect(compraObtida).toBeNull();
+        });
     }
     );
 
@@ -106,6 +128,23 @@ describe('CompraRepository', () => {
             const compraObtida = await compraRepository.obterCompra(1);
 
             expect(compraObtida).toBeNull();
+        });
+
+        it('deve retornar null se a compra não existir', async () => {
+            const compra = {
+                id: 1,
+                idUsuario: 1,
+                idIngressos: [1],
+                dataCompra: new Date(),
+            } as Compra;
+
+            await compraRepository.criarCompra(compra);
+
+            await compraRepository.excluirCompra(2);
+
+            const compraObtida = await compraRepository.obterCompra(1);
+
+            expect(compraObtida).toEqual(compra);
         });
     }
 

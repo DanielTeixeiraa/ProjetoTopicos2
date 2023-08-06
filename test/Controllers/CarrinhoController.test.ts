@@ -45,8 +45,8 @@ describe('CarrinhoController', () => {
 
             expect(res.status).toBeCalledWith(500);
             expect(res.json).toBeCalledWith({ error: 'Nao foi possivel criar carrinho' });
-        }
-        );
+        });
+      
     });
 
     describe('obterCarrinhos', () => {
@@ -63,6 +63,8 @@ describe('CarrinhoController', () => {
             expect(res.json).toBeCalledWith(carrinhos);
         });
 
+        
+
         it('deve retornar 500 quando ocorrer erro ao obter carrinhos', async () => {
             const req = {} as Request;
             const res = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
@@ -74,9 +76,8 @@ describe('CarrinhoController', () => {
             expect(res.status).toBeCalledWith(500);
             expect(res.json).toBeCalledWith({ error: 'Nao foi possivel obter carrinhos' });
         });
-    }
 
-    );
+    });
 
     describe('obterCarrinho', () => {
         it('deve retornar 200 quando obter carrinho', async () => {
@@ -103,6 +104,19 @@ describe('CarrinhoController', () => {
             expect(res.status).toBeCalledWith(500);
             expect(res.json).toBeCalledWith({ error: 'Nao foi possivel obter carrinho' });
         });
+
+        it('deve retornar 404 quando carrinho nao existir', async () => {
+            const req = { params: { id: 1 } } as unknown as Request;
+            const res = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+            jest.spyOn(carrinhoRepository, 'obterCarrinho').mockResolvedValue(null);
+
+            await carrinhoController.obterCarrinho(req, res);
+
+            expect(res.status).toBeCalledWith(404);
+            expect(res.json).toBeCalledWith({ error: 'Carrinho nao encontrado' });
+        }
+    );
     }
 
     );
@@ -133,9 +147,20 @@ describe('CarrinhoController', () => {
             expect(res.status).toBeCalledWith(500);
             expect(res.json).toBeCalledWith({ error: 'Nao foi possivel atualizar carrinho' });
         });
-    }
 
-    );
+        it('deve retornar 404 quando carrinho for invalido', async () => {
+            const carrinho = {id: 1, idIngressos: [1,2], idUsuario: 1} as Carrinho;
+            const req = { params: { id: 1 }, body: carrinho } as unknown as Request;
+            const res = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+            jest.spyOn(carrinhoRepository, 'atualizarCarrinho').mockResolvedValue(null);
+
+            await carrinhoController.atualizarCarrinho(req, res);
+
+            expect(res.status).toBeCalledWith(404);
+            expect(res.json).toBeCalledWith({ error: 'Carrinho nao encontrado' });
+        });
+    });
 
     describe('deletarCarrinho', () => {
         it('deve retornar 200 quando deletar carrinho', async () => {
@@ -166,6 +191,21 @@ describe('CarrinhoController', () => {
     
             expect(res.status).toBeCalledWith(500);
             expect(res.json).toBeCalledWith({ error: 'Nao foi possivel excluir carrinho' });
+        });
+
+        it('deve retornar 404 quando carrinho nao for encontrado', async () => {
+            const req = { params: { id: 1 } } as unknown as Request;
+            const res = {
+                status: jest.fn().mockReturnThis(),
+                json: jest.fn(),
+            } as any;
+    
+            jest.spyOn(carrinhoRepository, 'excluirCarrinho').mockResolvedValue(false);
+    
+            await carrinhoController.excluirCarrinho(req, res);
+    
+            expect(res.status).toBeCalledWith(404);
+            expect(res.json).toBeCalledWith({ error: 'Carrinho nao encontrado' });
         });
     });
 

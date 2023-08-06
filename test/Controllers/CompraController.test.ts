@@ -52,6 +52,19 @@ describe('CompraController', () => {
             expect(res.status).toBeCalledWith(500);
             expect(res.json).toBeCalledWith({ error: 'Nao foi possivel criar compra' });
         });
+
+        it('deve retornar 400 quando nao informar compra', async () => {
+            const req = { body: null } as Request;
+            const res = {
+                status: jest.fn().mockReturnThis(),
+                json: jest.fn(),
+            } as unknown as Response;
+
+            await compraController.criarCompra(req, res);
+
+            expect(res.status).toBeCalledWith(400);
+            expect(res.json).toBeCalledWith({ error: 'Compra nao encontrada' });
+        });
     });
 
 
@@ -153,6 +166,22 @@ describe('CompraController', () => {
             expect(res.status).toBeCalledWith(500);
             expect(res.json).toBeCalledWith({ error: 'Nao foi possivel atualizar compra' });
         });
+
+        it('deve retornar 404 quando compra nao for encontrado', async () => {
+            const compra = { id: 1, idIngressos: [1,2], idUsuario: 1, dataCompra: new Date() } as Compra;
+            const req = { params: { id: 1 }, body: compra } as unknown as Request;
+            const res = {
+                status: jest.fn().mockReturnThis(),
+                json: jest.fn(),
+            } as any;
+
+            jest.spyOn(compraRepository, 'atualizarCompra').mockResolvedValue(null);
+
+            await compraController.atualizarCompra(req, res);
+
+            expect(res.status).toBeCalledWith(404);
+            expect(res.json).toBeCalledWith({ error: 'Compra nao encontrada' });
+        });
     });
 
     describe('excluirCompra', () => {
@@ -185,7 +214,23 @@ describe('CompraController', () => {
             expect(res.status).toBeCalledWith(500);
             expect(res.json).toBeCalledWith({ error: 'Nao foi possivel excluir compra' });
         });
+
+        it('deve retornar 404 quando compra nao for encontrada', async () => {
+            const req = { params: { id: 1 } } as unknown as Request;
+            const res = {
+                status: jest.fn().mockReturnThis(),
+                json: jest.fn(),
+            } as any;
+
+            (compraRepository.excluirCompra as jest.Mock).mockResolvedValue(false);
+
+            await compraController.excluirCompra(req, res);
+
+            expect(res.status).toBeCalledWith(404);
+            expect(res.json).toBeCalledWith({ error: 'Compra nao encontrada' });
+        });
     });
+
 });
 
 
