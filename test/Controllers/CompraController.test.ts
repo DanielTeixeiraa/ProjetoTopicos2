@@ -99,6 +99,7 @@ describe('CompraController', () => {
             expect(res.status).toBeCalledWith(500);
             expect(res.json).toBeCalledWith({ error: 'Nao foi possivel obter compras' });
         });
+    
     });
 
     describe('obterCompra', () => {

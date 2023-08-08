@@ -13,11 +13,10 @@ describe('CompraRepository', () => {
         it('deve criar uma compra', async () => {
             const compra = {
                 id: 1,
-                idCarrinho: 1,
-                idIngresso: 1,
-                quantidade: 1,
-                preco: 100,
-            } as unknown as Compra;
+                idIngressos: [1,2],
+                idUsuario: 1,
+                dataCompra: new Date(),
+            } as Compra;
 
             const novaCompra = await compraRepository.criarCompra(compra);
 
@@ -29,19 +28,17 @@ describe('CompraRepository', () => {
         it('deve retornar uma lista de compras', async () => {
             const compra1 = {
                 id: 1,
-                idCarrinho: 1,
-                idIngresso: 1,
-                quantidade: 1,
-                preco: 100,
-            } as unknown as Compra;
+                idIngressos: [1,2],
+                idUsuario: 1,
+                dataCompra: new Date(),
+            } as Compra;
 
             const compra2 = {
                 id: 2,
-                idCarrinho: 2,
-                idIngresso: 2,
-                quantidade: 2,
-                preco: 200,
-            } as unknown as Compra;
+                idIngressos: [1,2],
+                idUsuario: 2,
+                dataCompra: new Date(),
+            } as Compra;
 
             await compraRepository.criarCompra(compra1);
             await compraRepository.criarCompra(compra2);
@@ -56,11 +53,10 @@ describe('CompraRepository', () => {
         it('deve retornar uma compra', async () => {
             const compra = {
                 id: 1,
-                idCarrinho: 1,
-                idIngresso: 1,
-                quantidade: 1,
-                preco: 100,
-            } as unknown as Compra;
+                idIngressos: [1,2],
+                idUsuario: 1,
+                dataCompra: new Date(),
+            } as Compra;
 
             await compraRepository.criarCompra(compra);
 
@@ -74,21 +70,19 @@ describe('CompraRepository', () => {
         it('deve atualizar uma compra', async () => {
             const compra = {
                 id: 1,
-                idCarrinho: 1,
-                idIngresso: 1,
-                quantidade: 1,
-                preco: 100,
-            } as unknown as Compra;
+                idIngressos: [1,2],
+                idUsuario: 1,
+                dataCompra: new Date(),
+            } as Compra;
 
             await compraRepository.criarCompra(compra);
 
             const compraAtualizada = {
                 id: 1,
-                idCarrinho: 1,
-                idIngresso: 1,
-                quantidade: 2,
-                preco: 100,
-            } as unknown as Compra;
+                idIngressos: [1,2],
+                idUsuario: 1,
+                dataCompra: new Date(),
+            }as Compra;
 
             const compraAtualizadaObtida = await compraRepository.atualizarCompra(compraAtualizada);
 
@@ -99,11 +93,10 @@ describe('CompraRepository', () => {
 
             const compraAtualizada = {
                 id: 1,
-                idCarrinho: 1,
-                idIngresso: 1,
-                quantidade: 2,
-                preco: 100,
-            } as unknown as Compra;
+                idIngressos: [1,2],
+                idUsuario: 1,
+                dataCompra: new Date(),
+            } as Compra;
 
             const compraAtualizadaObtida = await compraRepository.atualizarCompra(compraAtualizada);
 
@@ -117,11 +110,10 @@ describe('CompraRepository', () => {
         it('deve deletar uma compra', async () => {
             const compra = {
                 id: 1,
-                idCarrinho: 1,
-                idIngresso: 1,
-                quantidade: 1,
-                preco: 100,
-            } as unknown as Compra;
+                idIngressos: [1,2],
+                idUsuario: 1,
+                dataCompra: new Date(),
+            } as Compra;
 
             await compraRepository.criarCompra(compra);
 

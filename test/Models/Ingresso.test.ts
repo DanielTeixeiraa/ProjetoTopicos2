@@ -15,7 +15,7 @@ describe('IngressoRepository', () => {
                 id: 1,
                 idEvento: 1,
                 preco: 100,
-            } as unknown as Ingresso;
+            } as Ingresso;
 
             const novoIngresso = await ingressoRepository.criarIngresso(ingresso);
 
@@ -29,13 +29,13 @@ describe('IngressoRepository', () => {
                 id: 1,
                 idEvento: 1,
                 preco: 100,
-            } as unknown as Ingresso;
+            } as Ingresso;
 
             const ingresso2 = {
                 id: 2,
                 idEvento: 2,
                 preco: 200,
-            } as unknown as Ingresso;
+            } as Ingresso;
 
             await ingressoRepository.criarIngresso(ingresso1);
             await ingressoRepository.criarIngresso(ingresso2);
@@ -52,7 +52,7 @@ describe('IngressoRepository', () => {
                 id: 1,
                 idEvento: 1,
                 preco: 100,
-            } as unknown as Ingresso;
+            } as Ingresso;
 
             await ingressoRepository.criarIngresso(ingresso);
 
@@ -75,7 +75,7 @@ describe('IngressoRepository', () => {
                 id: 1,
                 idEvento: 1,
                 preco: 100,
-            } as unknown as Ingresso;
+            } as Ingresso;
 
             await ingressoRepository.criarIngresso(ingresso);
 

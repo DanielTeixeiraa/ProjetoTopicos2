@@ -13,10 +13,9 @@ describe('CarrinhoRepository', () => {
         it('deve criar um carrinho', async () => {
             const carrinho = {
                 id: 1,
+                idIngressos: [1,2],
                 idUsuario: 1,
-                idIngresso: 1,
-                quantidade: 1,
-            } as unknown as Carrinho;
+            } as Carrinho;
 
             const novoCarrinho = await carrinhoRepository.criarCarrinho(carrinho);
 
@@ -28,17 +27,15 @@ describe('CarrinhoRepository', () => {
         it('deve retornar uma lista de carrinhos', async () => {
             const carrinho1 = {
                 id: 1,
+                idIngressos: [1,2],
                 idUsuario: 1,
-                idIngresso: 1,
-                quantidade: 1,
-            } as unknown as Carrinho;
+            } as Carrinho;
 
             const carrinho2 = {
                 id: 2,
+                idIngressos: [1,2],
                 idUsuario: 2,
-                idIngresso: 2,
-                quantidade: 2,
-            } as unknown as Carrinho;
+            } as Carrinho;
 
             await carrinhoRepository.criarCarrinho(carrinho1);
             await carrinhoRepository.criarCarrinho(carrinho2);
@@ -53,10 +50,9 @@ describe('CarrinhoRepository', () => {
         it('deve retornar um carrinho', async () => {
             const carrinho = {
                 id: 1,
+                idIngressos: [1,2],
                 idUsuario: 1,
-                idIngresso: 1,
-                quantidade: 1,
-            } as unknown as Carrinho;
+            } as Carrinho;
 
             await carrinhoRepository.criarCarrinho(carrinho);
 
@@ -76,19 +72,17 @@ describe('CarrinhoRepository', () => {
         it('deve atualizar um carrinho', async () => {
             const carrinho = {
                 id: 1,
+                idIngressos: [1,2],
                 idUsuario: 1,
-                idIngresso: 1,
-                quantidade: 1,
-            } as unknown as Carrinho;
+            } as Carrinho;
 
             await carrinhoRepository.criarCarrinho(carrinho);
 
             const carrinhoAtualizado = {
                 id: 1,
+                idIngressos: [1,2,3],
                 idUsuario: 1,
-                idIngresso: 1,
-                quantidade: 2,
-            } as unknown as Carrinho;
+            } as Carrinho;
 
             const carrinhoRetornado = await carrinhoRepository.atualizarCarrinho(carrinhoAtualizado);
 
@@ -101,10 +95,9 @@ describe('CarrinhoRepository', () => {
         it('deve deletar um carrinho', async () => {
             const carrinho = {
                 id: 1,
+                idIngressos: [1,2],
                 idUsuario: 1,
-                idIngresso: 1,
-                quantidade: 1,
-            } as unknown as Carrinho;
+            } as Carrinho;
 
             await carrinhoRepository.criarCarrinho(carrinho);
 
