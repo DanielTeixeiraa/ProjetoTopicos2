@@ -200,6 +200,7 @@ describe('CarrinhoController', () => {
                 json: jest.fn(),
             } as any;
     
+            
             jest.spyOn(carrinhoRepository, 'excluirCarrinho').mockResolvedValue(false);
     
             await carrinhoController.excluirCarrinho(req, res);
