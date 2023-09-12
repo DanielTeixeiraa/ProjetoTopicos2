@@ -43,18 +43,27 @@ export class UsuarioController {
 
     async atualizarUsuario(req: Request, res: Response) {
         try {
-          const usuario = req.body as Usuario;
-          const usuarioAtualizado = await this.usuarioRepository.atualizarUsuario(usuario);
-          
-          if (usuarioAtualizado === null) { // Verifica se o usuario foi encontrado
-            res.status(404).json({ error: 'Usuario nao encontrado' });
-          } else {
-            res.status(200).json(usuarioAtualizado);
-          }
-        } catch (error) {
-          res.status(500).json({ error: 'Nao foi possivel atualizar usuario' });
+          const usuarioId = parseInt(req.params.id); // Obtenha o ID do parâmetro da URL
+          const usuarioExistente = await this.usuarioRepository.obterUsuario(usuarioId);
+
+          if (!usuarioExistente) {
+            return res.status(404).json({ error: 'Usuario não encontrado' });
         }
-      }
+
+        const usuarioAtualizado = req.body as Usuario; // Obtenha o usuario atualizado do corpo da solicitação
+        usuarioAtualizado.id = usuarioId; // Garanta que o ID seja o mesmo
+
+        const usuario = await this.usuarioRepository.atualizarUsuario(usuarioAtualizado);
+
+        if (!usuario) {
+            return res.status(500).json({ error: 'Não foi possível atualizar o usuario' });
+        }
+
+        return res.status(200).json(usuario);
+    } catch (error) {
+        return res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+}
       
 
     async excluirUsuario(req: Request, res: Response) {

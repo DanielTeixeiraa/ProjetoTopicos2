@@ -39,19 +39,28 @@ export class EventoController {
       
 
     async atualizarEvento(req: Request, res: Response) {
-        try {
-          const evento = req.body as Evento;
-          const eventoAtualizado = await this.eventoRepository.atualizarEvento(evento);
-          
-          if (eventoAtualizado === null) { // Verifica se o evento foi encontrado
-            res.status(404).json({ error: 'Evento não encontrado' });
-          } else {
-            res.status(200).json(eventoAtualizado);
-          }
-        } catch (error) {
-          res.status(500).json({ error: 'Nao foi possivel atualizar evento' });
+      try {
+        const eventoId = parseInt(req.params.id); // Obtenha o ID do parâmetro da URL
+        const eventoExistente = await this.eventoRepository.obterEvento(eventoId);
+
+        if (!eventoExistente) {
+            return res.status(404).json({ error: 'Evento não encontrado' });
         }
-      }
+
+        const eventoAtualizado = req.body as Evento; // Obtenha o evento atualizado do corpo da solicitação
+        eventoAtualizado.id = eventoId; // Garanta que o ID seja o mesmo
+
+        const evento = await this.eventoRepository.atualizarEvento(eventoAtualizado);
+
+        if (!evento) {
+            return res.status(500).json({ error: 'Não foi possível atualizar o evento' });
+        }
+
+        return res.status(200).json(evento);
+    } catch (error) {
+        return res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+}
       
 
     async excluirEvento(req: Request, res: Response) {

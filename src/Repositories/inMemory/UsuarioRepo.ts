@@ -3,8 +3,10 @@ import { UsuarioRepository } from "../UsuarioRepository";
 
 export class UsuarioRepo implements UsuarioRepository{
     private usuarios: Usuario[] = [];
+    private id: number = 0;
 
-    async criarUsuario(usuario: Usuario): Promise<Usuario> {     
+    async criarUsuario(usuario: Usuario): Promise<Usuario> {
+        usuario.id = ++this.id;
         this.usuarios.push(usuario);
         return usuario;
     }

@@ -5,8 +5,7 @@ import { CarrinhoUsecase } from '../usecases/CarrinhoUseCase';
 
 const carrinhoRoutes = Router();
 const carrinhoRepository = new CarrinhoRepo();
-const carrinhoUseCase = new CarrinhoUsecase(carrinhoRepository);
-const carrinhoController = new CarrinhoController(carrinhoUseCase);
+const carrinhoController = new CarrinhoController(carrinhoRepository);
 const carrinhoPath = '/carrinho';
 
 carrinhoRoutes.post(carrinhoPath, (req, res) => carrinhoController.criarCarrinho(req, res));

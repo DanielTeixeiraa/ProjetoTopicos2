@@ -4,8 +4,10 @@ import { IngressoRepository } from "../IngressoRepository";
 
 export class IngressoRepo implements IngressoRepository{
     private ingressos: Ingresso[] = [];
+    private id: number = 0;
 
     async criarIngresso(ingresso: Ingresso): Promise<Ingresso> {     
+        ingresso.id = ++this.id;
         this.ingressos.push(ingresso);
         return ingresso;
     }

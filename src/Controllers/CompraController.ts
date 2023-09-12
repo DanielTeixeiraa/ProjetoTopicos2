@@ -40,16 +40,25 @@ export class CompraController {
 
     async atualizarCompra(req: Request, res: Response) {
         try {
-            const compra = req.body as Compra;
-            const compraAtualizada = await this.compraRepository.atualizarCompra(compra);
+            const compraId = parseInt(req.params.id); // Obtenha o ID do parâmetro da URL
+            const compraExistente = await this.compraRepository.obterCompra(compraId);
 
-            if (compraAtualizada === null) { 
-                res.status(404).json({ error: 'Compra nao encontrada' });
-            } else {
-                res.status(200).json(compraAtualizada);
+            if (!compraExistente) {
+                return res.status(404).json({ error: 'Compra não encontrado' });
             }
+
+            const compraAtualizado = req.body as Compra; // Obtenha o compra atualizado do corpo da solicitação
+            compraAtualizado.id = compraId; // Garanta que o ID seja o mesmo
+
+            const compra = await this.compraRepository.atualizarCompra(compraAtualizado);
+
+            if (!compra) {
+                return res.status(500).json({ error: 'Não foi possível atualizar o compra' });
+            }
+
+            return res.status(200).json(compra);
         } catch (error) {
-            res.status(500).json({ error: 'Nao foi possivel atualizar compra' });
+            return res.status(500).json({ error: 'Erro interno do servidor' });
         }
     }
 

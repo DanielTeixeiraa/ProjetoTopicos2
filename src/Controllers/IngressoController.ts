@@ -7,7 +7,7 @@ export class IngressoController {
 
     async criarIngresso(req: Request, res: Response) {
         try {
-            const ingresso = req.body as Ingresso;
+            const ingresso = req.body;
             const novoIngresso = await this.ingressoRepository.criarIngresso(ingresso);
             res.status(201).json(novoIngresso);
         } catch (error) {
@@ -41,16 +41,25 @@ export class IngressoController {
 
     async atualizarIngresso(req: Request, res: Response) {
         try {
-            const ingresso = req.body as Ingresso;
-            const ingressoAtualizado = await this.ingressoRepository.atualizarIngresso(ingresso);
+            const ingressoId = parseInt(req.params.id); // Obtenha o ID do parâmetro da URL
+            const ingressoExistente = await this.ingressoRepository.obterIngresso(ingressoId);
 
-            if (ingressoAtualizado === null) { // Verifica se o ingresso foi encontrado
-                res.status(404).json({ error: 'Ingresso nao encontrado' });
-            } else {
-                res.status(200).json(ingressoAtualizado);
+            if (!ingressoExistente) {
+                return res.status(404).json({ error: 'Ingresso não encontrado' });
             }
+
+            const ingressoAtualizado = req.body as Ingresso; // Obtenha o ingresso atualizado do corpo da solicitação
+            ingressoAtualizado.id = ingressoId; // Garanta que o ID seja o mesmo
+
+            const ingresso = await this.ingressoRepository.atualizarIngresso(ingressoAtualizado);
+
+            if (!ingresso) {
+                return res.status(500).json({ error: 'Não foi possível atualizar o ingresso' });
+            }
+
+            return res.status(200).json(ingresso);
         } catch (error) {
-            res.status(500).json({ error: 'Nao foi possivel atualizar ingresso' });
+            return res.status(500).json({ error: 'Erro interno do servidor' });
         }
     }
 

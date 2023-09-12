@@ -3,8 +3,10 @@ import { CompraRepository } from "../CompraRepository";
 
 export class CompraRepo implements CompraRepository{
     private compras: Compra[] = [];
+    private id: number = 0;
 
-    async criarCompra(compra: Compra): Promise<Compra> {     
+    async criarCompra(compra: Compra): Promise<Compra> {    
+        compra.id = ++this.id;
         this.compras.push(compra);
         return compra;
     }

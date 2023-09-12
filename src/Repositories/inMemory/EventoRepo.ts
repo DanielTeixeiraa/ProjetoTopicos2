@@ -3,8 +3,10 @@ import { EventoRepository } from "src/Repositories/EventoRepository";
 
 export class EventoRepo implements EventoRepository{
     private eventos: Evento[] = [];
+    private id: number = 0;
 
-    async criarEvento(evento: Evento): Promise<Evento> {     
+    async criarEvento(evento: Evento): Promise<Evento> {
+        evento.id = ++this.id;     
         this.eventos.push(evento);
         return evento;
     }

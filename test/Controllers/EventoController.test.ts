@@ -237,13 +237,14 @@ describe('obterEvento', () => {
     // Deve lidar com a atualização de um evento inexistente e retornar o código de status 404
     it('deve lidar com a atualização de um evento inexistente e retornar o código de status 404', async () => {
       const req = {
-          params: { id: '100' },
+
           body: {
               nome: 'Evento Atualizado',
               data: '2023-07-18',
-              local: 'Local Atualizado',
+              localizacao: 'Local Atualizado',
+              capacidade: 22;
           },
-      } as unknown as Request;
+      }  as Request;
 
      
       const res = {
