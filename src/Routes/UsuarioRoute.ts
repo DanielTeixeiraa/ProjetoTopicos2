@@ -1,16 +1,20 @@
 import express, { Router } from 'express';
 import { UsuarioController } from '../Controllers/UsuarioController';
-import { UsuarioRepository } from '../Repositories/UsuarioRepository';
+import { UsuarioRepo } from '../Repositories/inMemory/UsuarioRepo';
+import { UsuarioUseCase } from '../usecases/UsuarioUseCase';
 
-export function createUsuarioRouter(usuarioRepository: UsuarioRepository): Router {
-    const router = express.Router();
-    const usuarioController = new UsuarioController(usuarioRepository);
-   
-    router.post('/', (req, res) => usuarioController.criarUsuario(req, res));
-    router.get('/', (req, res) => usuarioController.obterUsuarios(req, res));
-    router.get('/:id', (req, res) => usuarioController.obterUsuario(req, res));
-    router.put('/:id', (req, res) => usuarioController.atualizarUsuario(req, res));
-    router.delete('/:id', (req, res) => usuarioController.excluirUsuario(req, res));
-  
-    return router;
-  }
+const usuarioRoutes = Router();
+const usuarioRepository = new UsuarioRepo();
+const usuarioUseCase = new UsuarioUseCase(usuarioRepository);
+const usuarioController = new UsuarioController(usuarioUseCase);
+const usuarioPath = '/usuario';
+
+usuarioRoutes.post(usuarioPath, (req, res) => usuarioController.criarUsuario(req, res));
+usuarioRoutes.get(usuarioPath, (req, res) => usuarioController.obterUsuarios(req, res));
+usuarioRoutes.get(`${usuarioPath}/:id`, (req, res) => usuarioController.obterUsuario(req, res));
+usuarioRoutes.put(`${usuarioPath}/:id`, (req, res) => usuarioController.atualizarUsuario(req, res));
+usuarioRoutes.delete(`${usuarioPath}/:id`, (req, res) => usuarioController.excluirUsuario(req, res));
+
+export default usuarioRoutes;
+
+

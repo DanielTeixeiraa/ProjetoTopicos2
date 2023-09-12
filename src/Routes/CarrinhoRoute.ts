@@ -1,16 +1,20 @@
 import express, { Router } from 'express';
 import { CarrinhoController } from '../Controllers/CarrinhoController';
-import { CarrinhoRepository } from '../Repositories/CarrinhoRepository';
+import { CarrinhoRepo } from '../Repositories/inMemory/CarrinhoRepo';
+import { CarrinhoUsecase } from '../usecases/CarrinhoUseCase';
 
-export function createCarrinhoRouter(carrinhoRepository: CarrinhoRepository): Router {
-    const router = express.Router();
-    const carrinhoController = new CarrinhoController(carrinhoRepository);
-   
-    router.post('/', (req, res) => carrinhoController.criarCarrinho(req, res));
-    router.get('/', (req, res) => carrinhoController.obterCarrinhos(req, res));
-    router.get('/:id', (req, res) => carrinhoController.obterCarrinho(req, res));
-    router.put('/:id', (req, res) => carrinhoController.atualizarCarrinho(req, res));
-    router.delete('/:id', (req, res) => carrinhoController.excluirCarrinho(req, res));
-  
-    return router;
-  }
+const carrinhoRoutes = Router();
+const carrinhoRepository = new CarrinhoRepo();
+const carrinhoUseCase = new CarrinhoUsecase(carrinhoRepository);
+const carrinhoController = new CarrinhoController(carrinhoUseCase);
+const carrinhoPath = '/carrinho';
+
+carrinhoRoutes.post(carrinhoPath, (req, res) => carrinhoController.criarCarrinho(req, res));
+carrinhoRoutes.get(carrinhoPath, (req, res) => carrinhoController.obterCarrinhos(req, res));
+carrinhoRoutes.get(`${carrinhoPath}/:id`, (req, res) => carrinhoController.obterCarrinho(req, res));
+carrinhoRoutes.put(`${carrinhoPath}/:id`, (req, res) => carrinhoController.atualizarCarrinho(req, res));
+carrinhoRoutes.delete(`${carrinhoPath}/:id`, (req, res) => carrinhoController.excluirCarrinho(req, res));
+
+export default carrinhoRoutes;
+
+

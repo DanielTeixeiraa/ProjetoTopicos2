@@ -1,15 +1,20 @@
 import express, { Router } from 'express';
 import { EventoController } from '../Controllers/EventoController';
-import { EventoRepository } from '../Repositories/EventoRepository';
+import { EventoRepo } from '../Repositories/inMemory/EventoRepo';
+import { EventosUseCase } from '../usecases/EventosUseCase';
 
-export function createEventoRouter(eventoRepository: EventoRepository): Router {
-    const router = express.Router();
-    const eventoController = new EventoController(eventoRepository);
-   
-    router.post('/', (req, res) => eventoController.criarEvento(req, res));
-    router.get('/', (req, res) => eventoController.obterEventos(req, res));
-    router.put('/:id', (req, res) => eventoController.atualizarEvento(req, res));
-    router.delete('/:id', (req, res) => eventoController.excluirEvento(req, res));
-  
-    return router;
-  }
+const eventoRoutes = Router();
+const eventoRepository = new EventoRepo();
+const eventoUseCase = new EventosUseCase(eventoRepository);
+const eventoController = new EventoController(eventoUseCase);
+const eventoPath = '/evento';
+
+eventoRoutes.post(eventoPath, (req, res) => eventoController.criarEvento(req, res));
+eventoRoutes.get(eventoPath, (req, res) => eventoController.obterEventos(req, res));
+eventoRoutes.get(`${eventoPath}/:id`, (req, res) => eventoController.obterEvento(req, res));
+eventoRoutes.put(`${eventoPath}/:id`, (req, res) => eventoController.atualizarEvento(req, res));
+eventoRoutes.delete(`${eventoPath}/:id`, (req, res) => eventoController.excluirEvento(req, res));
+
+export default eventoRoutes;
+
+
