@@ -1,4 +1,4 @@
-import express, { Express, Router } from 'express';
+import express, { Express } from 'express';
 
 
 import carrinhoRoutes from './Routes/CarrinhoRoute';
